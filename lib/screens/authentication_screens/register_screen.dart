@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_muslim_soul_instagram/constants/constants.dart';
 import 'package:flutter_muslim_soul_instagram/screens/authentication_screens/widgets/text_field_decoration_widget.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'controllers/register_controller.dart';
 
@@ -58,6 +61,38 @@ class RegisterScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // I have added this --> Profile picture
+                    // rest of the code is same
+                    GestureDetector(
+                      onTap: () async {
+                        _registrationController.getImage(ImageSource.gallery);
+                      },
+                      child: Center(
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Obx(
+                            () => _registrationController.selectedImagePath.value == ''
+                                ? const CircleAvatar(
+                                    child: Icon(
+                                    Icons.person,
+                                    size: 50,
+                                  ))
+                                : CircleAvatar(
+                                    radius: 80,
+                                    backgroundImage: Image.file(
+                                      File(_registrationController.selectedImagePath.value),
+                                      fit: BoxFit.fill,
+                                    ).image,
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8,),
                     Form(
                       key: _registrationController.formKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -158,7 +193,7 @@ class RegisterScreen extends StatelessWidget {
                                       ),
                                     ),
                               onPressed: () {
-                                _registrationController.register();
+                                _registrationController.userRegister();
                               },
                             ),
                           ),

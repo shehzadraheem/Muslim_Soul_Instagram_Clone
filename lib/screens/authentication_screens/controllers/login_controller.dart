@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +12,7 @@ class LoginController extends GetxController{
   var email = '';
   var password = '';
   var isLoading = false.obs;
+  final _auth = FirebaseAuth.instance;
 
   @override
   void onInit() {
@@ -41,7 +43,34 @@ class LoginController extends GetxController{
     return null;
   }
 
-  Future<void> login()async{
-    // implement in next part
+  Future<void> login() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      // if user credentials are not correct then user can't login
+      return;
+    }
+    isLoading.value = true;
+
+    formKey.currentState!.save();
+
+    try {
+
+      await _auth
+          .signInWithEmailAndPassword(email: email.trim(),
+          password: password.trim()).then((value) async {
+
+                Get.offAllNamed('/main_screen');
+      });
+
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('User not found');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong Password');
+      }
+    } catch (e) {
+      print(e);
+    }
+    isLoading.value = false;
   }
 }

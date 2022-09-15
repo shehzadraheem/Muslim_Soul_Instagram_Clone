@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "738020287685",
+    "project_id": "muslimsoulinstagram",
+    "storage_bucket": "muslimsoulinstagram.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738020287685:android:dca313d12f166fd778fcac",
+        "android_client_info": {
+          "package_name": "com.example.flutter_muslim_soul_instagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738020287685-p8ma53conos4nrf70ajbgncqv306kbg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8n_G_vstB5ILieMtHhvEXcV-tM-NTHWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738020287685-p8ma53conos4nrf70ajbgncqv306kbg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
