@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);
 
-  final _controller = Get.put(MainScreenController());
+  final _controller = Get.put(MainScreenController(),permanent: true);
   @override
   Widget build(BuildContext context) {
     return Obx((){
