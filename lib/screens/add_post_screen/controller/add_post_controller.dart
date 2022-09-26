@@ -108,6 +108,7 @@ class AddPostController extends GetxController{
     required String userUrl }) async {
     User? user = FirebaseAuth.instance.currentUser;
     await userDatBaseReference.add({
+      'postTitle': postTxtController.text, // add this line in your code
       'userUid': user!.uid,
       'userName': userName,
       'userUrl': userUrl,

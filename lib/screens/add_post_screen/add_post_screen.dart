@@ -114,12 +114,8 @@ class AddPostScreen extends StatelessWidget {
                       },
                       child: _postController.isLoading.value
                           ? const CircularProgressIndicator(color: Colors.white,)
-                          : Text(
-                        'Post',
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle1!
-                            .copyWith(color: Colors.white),
+                          : Text('Post',
+                             style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
                       ),
                     ),
                   );
