@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_muslim_soul_instagram/screens/home_screen/controller/home_controller.dart';
 import 'package:intl/intl.dart';
 import 'package:unicons/unicons.dart';
-
+import 'package:get/get.dart';
 import '../../../models/post.dart';
+import 'like_widget.dart';
 
 
 class PostItem extends StatelessWidget {
-  PostItem({Key? key , this.post}) : super(key: key);
-  final Post? post;
+  PostItem({
+    Key? key,
+    required this.post,
+  })
+      : super(key: key);
+  final Post post;
+  // GetX dependency injection
+  final _homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
 
-    final date =  DateTime.fromMillisecondsSinceEpoch(post!.time!);
+    final date =  DateTime.fromMillisecondsSinceEpoch(post.time!);
     final format =  DateFormat("yMd");
     final dateString = format.format(date);
 
@@ -30,9 +38,9 @@ class PostItem extends StatelessWidget {
               leading: CircleAvatar(
                 radius: 30,
                 backgroundImage:
-                NetworkImage(post!.userUrl!),
+                NetworkImage(post.userUrl!),
               ),
-              title: Text(post!.userName!, style: Theme.of(context).textTheme.subtitle1),
+              title: Text(post.userName!, style: Theme.of(context).textTheme.subtitle1),
               subtitle: Text(dateString),
               trailing: IconButton(
                   onPressed: null,
@@ -43,12 +51,12 @@ class PostItem extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16,),
-            Text(post!.postTitle!, textAlign: TextAlign.left,),
+            Text(post.postTitle!, textAlign: TextAlign.left,),
             const SizedBox(height: 16,),
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
-                post!.postUrl!,
+                post.postUrl!,
                 height: 200,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
@@ -59,14 +67,25 @@ class PostItem extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    IconButton(
-                        onPressed: null,
-                        icon: Icon(UniconsLine.thumbs_up,
-                            color: Theme.of(context).iconTheme.color)),
-                    IconButton(
-                        onPressed: null,
-                        icon: Icon(UniconsLine.comment_lines,
-                            color: Theme.of(context).iconTheme.color))
+                    LikeWidget(
+                      likePressed: (){
+                        _homeController.setLike(post.postId!);
+                      },
+                      likes: post.likes!.length,
+                      isLiked: post.likes!.contains(_homeController.user.uid),
+                      postId: post.postId!,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        IconButton(
+                            onPressed: null,
+                            icon: Icon(UniconsLine.comment_lines,
+                                color: Theme.of(context).iconTheme.color),
+                        ),
+                        Text('0 comment'),
+                      ],
+                    )
                   ],
                 ),
                 IconButton(

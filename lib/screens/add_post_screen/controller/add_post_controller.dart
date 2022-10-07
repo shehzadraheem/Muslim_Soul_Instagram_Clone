@@ -113,7 +113,8 @@ class AddPostController extends GetxController{
       'userName': userName,
       'userUrl': userUrl,
       'postUrl': url,
-      'time': DateTime.now().millisecondsSinceEpoch
+      'time': DateTime.now().millisecondsSinceEpoch,
+      'likes' : []
     });
     return;
   }

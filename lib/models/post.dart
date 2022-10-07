@@ -8,6 +8,7 @@ class Post{
   String? userUrl;
   String? userUid;
   int? time;
+  List<String>? likes;
 
   Post(
       this.postId,
@@ -16,7 +17,8 @@ class Post{
       this.userName,
       this.userUrl,
       this.userUid,
-      this.time  );
+      this.time,
+      this.likes );
 
   Post.fromDocumentSnapshot(
       DocumentSnapshot documentSnapshot
@@ -28,6 +30,7 @@ class Post{
     userUrl = documentSnapshot['userUrl'];
     userUid = documentSnapshot['userUid'];
     time = documentSnapshot['time'];
+    likes = documentSnapshot['likes'].cast<String>();
   }
 
 }

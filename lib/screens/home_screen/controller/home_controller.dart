@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_muslim_soul_instagram/models/post.dart';
 import 'package:get/get.dart';
+import 'dart:developer';
 
 class HomeController extends GetxController{
 
@@ -9,6 +11,7 @@ class HomeController extends GetxController{
   List<Post> get posts => _postList.value;
 
   final _collectionReference = FirebaseFirestore.instance.collection("post");
+  get user => FirebaseAuth.instance.currentUser;
 
   @override
   void onInit() {
@@ -30,4 +33,33 @@ class HomeController extends GetxController{
     });
   }
 
+  Future<void> setLike(String postId) async{
+    DocumentSnapshot doc = await FirebaseFirestore.instance.collection("post").doc(postId).get();
+
+    // if it contains current user id then
+    if ((doc.data()! as dynamic)['likes'].contains(user.uid)) {
+
+      // true --> remove id
+      await _collectionReference
+          .doc(postId)
+          .update({
+        "likes": FieldValue.arrayRemove([user.uid]),
+      })
+          .catchError((e){
+        throw Exception("Something went wrong");
+      });
+
+    } else {
+
+      await _collectionReference
+          .doc(postId)
+          .update({
+        "likes": FieldValue.arrayUnion([user.uid]),
+      })
+          .catchError((e){
+        throw Exception("Something went wrong");
+      });
+
+    }
+  }
 }

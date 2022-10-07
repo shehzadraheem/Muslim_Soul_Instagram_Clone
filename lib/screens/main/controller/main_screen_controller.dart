@@ -10,7 +10,7 @@ class MainScreenController extends GetxController{
   RxInt selectedIndex = 0.obs;
 
   final widgetOptions =  [
-    const HomeScreen(),
+    HomeScreen(),
     AddPostScreen(),
     const ChatScreen(),
     ProfileScreen()

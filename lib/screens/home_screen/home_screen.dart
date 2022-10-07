@@ -4,29 +4,23 @@ import 'package:flutter_muslim_soul_instagram/screens/home_screen/widgets/post_i
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+
+  final _homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: GetX<HomeController>(
-        init: Get.put<HomeController>(HomeController()),
-        builder: (HomeController homeController) {
-          if(homeController.posts.isNotEmpty){
-            return Expanded(
-              child: ListView.builder(
-                itemCount: homeController.posts.length,
-                itemBuilder: (context,index){
-                  return PostItem(post: homeController.posts[index],);
-                },
-              ),
+      child: Obx((){
+        return ListView.builder(
+          itemCount: _homeController.posts.length,
+          itemBuilder: (context,index){
+            return PostItem(
+              post: _homeController.posts[index],
             );
-          }
-          else {
-            return const Center(child: CircularProgressIndicator(),);
-          }
-        },
-      ),
+          },
+        );
+      }),
     );
   }
 }
