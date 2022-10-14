@@ -114,7 +114,8 @@ class AddPostController extends GetxController{
       'userUrl': userUrl,
       'postUrl': url,
       'time': DateTime.now().millisecondsSinceEpoch,
-      'likes' : []
+      'likes' : [],
+      'commentsCount' : 0
     });
     return;
   }

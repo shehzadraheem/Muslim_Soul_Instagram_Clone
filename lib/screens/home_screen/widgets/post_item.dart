@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_muslim_soul_instagram/screens/home_screen/controller/home_controller.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:unicons/unicons.dart';
-import 'package:get/get.dart';
+
 import '../../../models/post.dart';
+import 'comment_widget.dart';
 import 'like_widget.dart';
 
 
@@ -75,17 +77,17 @@ class PostItem extends StatelessWidget {
                       isLiked: post.likes!.contains(_homeController.user.uid),
                       postId: post.postId!,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        IconButton(
-                            onPressed: null,
-                            icon: Icon(UniconsLine.comment_lines,
-                                color: Theme.of(context).iconTheme.color),
-                        ),
-                        Text('0 comment'),
-                      ],
-                    )
+                    CommentWidget(
+                      comments: post.commentsCount!,
+                      onPressed: (){
+                        Get.toNamed('/comments_screen', arguments: [
+                          post.userName, //0
+                          post.userUrl, //1
+                          post.userUid, //2
+                          post.postId //3
+                        ] );
+                      },
+                    ),
                   ],
                 ),
                 IconButton(
