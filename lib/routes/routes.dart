@@ -6,6 +6,7 @@ import 'package:flutter_muslim_soul_instagram/screens/main/main_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
 import '../screens/splashs_screen/splash_screen.dart';
+import '../screens/story_view_full_screen/story_view_full_screen.dart';
 
 
 // I'm using Getx for state management
@@ -17,5 +18,6 @@ List<GetPage<dynamic>> getPages() {
     GetPage(name: "/register_screen", page: ()=>  RegisterScreen()),
     GetPage(name: "/main_screen", page: ()=>  MainScreen()),
     GetPage(name: "/comments_screen", page: ()=>  CommentsScreen()),
+    GetPage(name: "/story_view_screen", page: ()=>  StoryViewFullScreen()),
   ];
 }

@@ -29,6 +29,13 @@
             {
               "client_id": "738020287685-p8ma53conos4nrf70ajbgncqv306kbg5.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "738020287685-ggphl13d0e9ocsspeu186s8hrn90j32t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterMuslimSoulInstagram"
+              }
             }
           ]
         }
